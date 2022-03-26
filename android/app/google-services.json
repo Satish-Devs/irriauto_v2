@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "558677473657",
+    "firebase_url": "https://autoagri-571ba-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "autoagri-571ba",
+    "storage_bucket": "autoagri-571ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558677473657:android:f9815cb0ee523c4877d7a8",
+        "android_client_info": {
+          "package_name": "com.example.email_password_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558677473657-8efvscd6in9bbmq8dkeclk3t7q22olfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxZvQQtRi7i_8HqySsZTc6lPUZaoO_1gY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558677473657-8efvscd6in9bbmq8dkeclk3t7q22olfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
