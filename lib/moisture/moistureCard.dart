@@ -73,7 +73,7 @@ class _MoistureCardState extends State<MoistureCard> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                         child: Text(
-                          '\nMoisture Sensor 1 : ${widget.moisture1}% \nMoisture Sensor 2: ${widget.moisture2}\n ',
+                          '\nMoisture Sensor 1 : ${widget.moisture1} \nMoisture Sensor 2: ${widget.moisture2}\n ',
                           style: TextStyle(
                             fontSize: 16,
                             fontFamily: 'Lexend Deca',

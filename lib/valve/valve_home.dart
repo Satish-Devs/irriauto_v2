@@ -6,10 +6,12 @@ import 'package:email_password_login/model/sensor_model.dart';
 import 'package:email_password_login/model/user_model.dart';
 import 'package:email_password_login/model/valve_model.dart';
 import 'package:email_password_login/screens/login_screen.dart';
+import 'package:email_password_login/valve/valve_utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
 
@@ -18,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  DatabaseReference ref = FirebaseDatabase.instance.ref("sensorReadings");
   late SensorModel model;
   bool isLoading = true;
 
@@ -25,14 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       isLoading = true;
     });
-    print("Sunil is great developer");
 
-    DatabaseReference ref = FirebaseDatabase.instance.ref("sensorReadings");
-    DatabaseEvent event = await ref.once();
 
-    LinkedHashMap map = event.snapshot.value as LinkedHashMap;
-    SensorModel tempModel  = SensorModel.fromMap(map);
-    model = tempModel;
+    // DatabaseReference ref = FirebaseDatabase.instance.ref("sensorReadings");
+    // DatabaseEvent event = await ref.once();
+
+    // LinkedHashMap map = event.snapshot.value as LinkedHashMap;
+    // SensorModel tempModel  = SensorModel.fromMap(map);
+    // model = tempModel;
+
 
     setState(() {
       isLoading = false;
@@ -40,13 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   
   }
   
-
-
-
-  
-
-  List<ValveModel> valveList = [
-    ValveModel.fromMap( { 'temp': 45, 'nextSchedule': '9.00 am 07/03/2022', 'moisture2': 78, 'moisture1': 48, 'windDirection': 'East - West', 'windSpeed': 110, 'flow': 200, 'status': 'Idle', 'valveNo': 1}), ValveModel.fromMap( { 'temp': 45, 'nextSchedule': '9.00 am 07/03/2022', 'moisture2': 78, 'moisture1': 48, 'windDirection': 'East - West', 'windSpeed': 110, 'flow': 200, 'status': 'Idle', 'valveNo': 2})];
   
   
   @override
@@ -67,19 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: isLoading
               ? Center(child: CircularProgressIndicator())
               :SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child:   ListView( padding: EdgeInsets.zero,
-            scrollDirection: Axis.vertical,
-            children: [
-              
-              ValveCard(valveNo : 1, moisture1: model.m1,moisture2 :model.m2, temp :model.temp,windSpeed : 80,windDirection : "North to South", status : "Idle", nextSchedule : "Scheduled on 9am",flow :  100),
-
-              ValveCard(valveNo : 2, moisture1: model.m3,moisture2 :model.m4, temp :model.temp,windSpeed : 80,windDirection : "North to South", status : "Idle", nextSchedule : "Scheduled on 9am",flow :  100),
-
-            ]
-            ),
-           
+        child: MultiProvider(
+          providers: [ 
+            StreamProvider<SensorModel>(
+                  create: (_) => ref.onValue.map((event) {
+                    return SensorModel.fromMap(event.snapshot.value);
+                  }), initialData: SensorModel(humidity: 0, m1: 0, m2: 0, m3: 0, m4: 0, rain: 0, temp: 0)),
+          ],
+          child: VcardContainer()
         ),
       ),
       );

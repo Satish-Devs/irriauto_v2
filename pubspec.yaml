@@ -42,6 +42,7 @@ dependencies:
   rflutter_alert: ^2.0.4
   loading_animation: ^0.0.1
   firebase_database: ^9.0.8
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:

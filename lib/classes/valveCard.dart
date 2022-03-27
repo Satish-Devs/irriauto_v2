@@ -5,23 +5,21 @@ class ValveCard extends StatelessWidget {
   var moisture1;
   var moisture2;
   var temp;
-  var windSpeed;
-  var windDirection;
   var flow;
   var status;
-  var nextSchedule;
+  var humidity;
+  var rain;
   Map data = {};
 
-  ValveCard({valveNo, moisture1, moisture2, temp, windSpeed, windDirection,status, nextSchedule, flow}) {
+  ValveCard({valveNo, moisture1, moisture2, temp,status, flow, rain, humidity}) {
     this.valveNo = valveNo;
     this.moisture1 = moisture1;
     this.moisture2 = moisture2;
     this.temp = temp;
-    this.windSpeed = windSpeed;
-    this.windDirection = windDirection;
     this.status = status;
-    this.nextSchedule = nextSchedule;
     this.flow = flow;
+    this.humidity = humidity;
+    this.rain = rain;
   }
 
   @override
@@ -75,7 +73,7 @@ class ValveCard extends StatelessWidget {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                         child: Text(
-                          'Temperature : $temp°C \nMoisture Sensor 1 : $moisture1% \nMoisture Sensor 2: $moisture2\nWind Speed : $windSpeed/hr \nWater Flow : $flow L ',
+                          'Temperature : $temp°C \nMoisture Sensor 1 : $moisture1 \nMoisture Sensor 2: $moisture2\nHumidity : $humidity\nRain : $rain\nWater Flow : $flow L ',
                           style: TextStyle(
                             fontFamily: 'Lexend Deca',
                             color: Color(0xFF090F13),
@@ -90,7 +88,7 @@ class ValveCard extends StatelessWidget {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                         child: Text(
-                          'Status : $status\nNext on $nextSchedule',
+                          'Status : $status',
                           style: TextStyle(
                             fontFamily: 'Lexend Deca',
                             color: Colors.redAccent,
