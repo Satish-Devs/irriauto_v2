@@ -22,6 +22,13 @@ class _AutoModeState extends State<AutoMode> {
     });
   }
 
+  void toggleValve(valveNo, status) async {
+  
+      await ref.update({
+        "v$valveNo": !status,
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SensorModel>(builder: (context, sensorModel, child) {
@@ -93,6 +100,8 @@ class _AutoModeState extends State<AutoMode> {
                 onPressed: () {
                   setState(() {
                     toggleMode(!sensorModel.mode);
+                    toggleValve(1, true);
+                    toggleValve(2, true);
                   });
                 },
                 iconSize: 65,
@@ -124,15 +133,10 @@ class _ManualModeState extends State<ManualMode> {
   }
 
   void toggleValve(valveNo, status) async {
-    if (status == "Idle") {
+  
       await ref.update({
-        "v$valveNo": "Running",
+        "v$valveNo": !status,
       });
-    } else {
-      await ref.update({
-        "v$valveNo": "Idle",
-      });
-    }
   }
 
   @override
@@ -210,6 +214,9 @@ class _ManualModeState extends State<ManualMode> {
                     onPressed: () {
                       setState(() {
                         toggleMode(!sensorModel.mode);
+                        toggleValve(1, true);
+                        toggleValve(2, true);
+
                       });
                     },
                     iconSize: 65,
@@ -260,7 +267,7 @@ class _ManualModeState extends State<ManualMode> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0, 4, 0, 0),
                                 child: Text(
-                                  sensorModel.v1 == "Idle"
+                                  !sensorModel.v1
                                       ? 'is Idle'
                                       : 'is Running',
                                   style: TextStyle(
@@ -276,7 +283,7 @@ class _ManualModeState extends State<ManualMode> {
                         ),
                       ),
                       IconButton(
-                        icon: sensorModel.v1 == "Idle"
+                        icon: !sensorModel.v1
                             ? Icon(Icons.invert_colors_off_rounded)
                             : Icon(Icons.invert_colors),
                         onPressed: () {
@@ -315,7 +322,7 @@ class _ManualModeState extends State<ManualMode> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Valve 1',
+                                'Valve 2',
                                 style: TextStyle(
                                   fontFamily: 'Lexend Deca',
                                   color: Color(0xFF090F13),
@@ -327,7 +334,7 @@ class _ManualModeState extends State<ManualMode> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0, 4, 0, 0),
                                 child: Text(
-                                  sensorModel.v2 == "Idle"
+                                  !sensorModel.v2
                                       ? 'is Idle'
                                       : 'is Running',
                                   style: TextStyle(
@@ -343,7 +350,7 @@ class _ManualModeState extends State<ManualMode> {
                         ),
                       ),
                       IconButton(
-                        icon: sensorModel.v2 == "Idle"
+                        icon: !sensorModel.v2
                             ? Icon(Icons.invert_colors_off_rounded)
                             : Icon(Icons.invert_colors),
                         onPressed: () {
