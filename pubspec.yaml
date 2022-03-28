@@ -43,6 +43,9 @@ dependencies:
   loading_animation: ^0.0.1
   firebase_database: ^9.0.8
   provider: ^6.0.2
+  http: ^0.13.4
+  geolocator: ^8.2.0
+  geocoding: ^2.0.4
 
 dev_dependencies:
   flutter_test:

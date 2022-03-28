@@ -3,6 +3,8 @@ import 'package:email_password_login/moisture/moistureCard.dart';
 import 'package:email_password_login/moisture/moisture_home.dart';
 import 'package:email_password_login/utils/utils.dart';
 import 'package:email_password_login/valve/valve_home.dart';
+import 'package:email_password_login/weather/services/permission.dart';
+import 'package:email_password_login/weather/weather.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../screens/login_screen.dart';
@@ -40,8 +42,8 @@ class Home extends StatelessWidget {
     HomeScreen(),
     MoistureScreen(),
     Modes(),
-    Modes(),
-    Modes(),
+    WeatherPage(),
+    WeatherPage(),
   ];
 
   final _primaryColor = Colors.white;
