@@ -54,7 +54,9 @@ class _ModesState extends State<Modes> {
               ],
               child: Column(
                 children: [
+                  SizedBox(height: 10,),
                   AutoMode(),
+                  SizedBox(height: 5,),
                   ManualMode(),
                 ],
               ),

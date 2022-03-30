@@ -83,8 +83,8 @@ class _AutoModeState extends State<AutoMode> {
                           sensorModel.mode ? 'is turned on' : 'is turned off',
                           style: TextStyle(
                             fontFamily: 'Lexend Deca',
-                            color: Colors.red,
-                            fontSize: 12,
+                            color: sensorModel.mode ? Colors.green[500]: Colors.red[500] ,
+                            fontSize: 18,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
@@ -94,9 +94,8 @@ class _AutoModeState extends State<AutoMode> {
                 ),
               ),
               IconButton(
-                icon: sensorModel.mode
-                    ? Icon(Icons.toggle_on)
-                    : Icon(Icons.toggle_off),
+                icon: Icon(sensorModel.mode? Icons.toggle_on : Icons.toggle_off , color: sensorModel.mode ? Colors.green[500]: Colors.red[500],),
+
                 onPressed: () {
                   setState(() {
                     toggleMode(!sensorModel.mode);
@@ -197,8 +196,8 @@ class _ManualModeState extends State<ManualMode> {
                                   : 'is turned off',
                               style: TextStyle(
                                 fontFamily: 'Lexend Deca',
-                                color: Colors.red,
-                                fontSize: 12,
+                               color: !sensorModel.mode ? Colors.green[500]: Colors.red[500],
+                                fontSize: 18,
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
@@ -208,15 +207,14 @@ class _ManualModeState extends State<ManualMode> {
                     ),
                   ),
                   IconButton(
-                    icon: !sensorModel.mode
-                        ? Icon(Icons.toggle_on)
-                        : Icon(Icons.toggle_off),
+                    icon: Icon(!sensorModel.mode
+                        ? Icons.toggle_on
+                        : Icons.toggle_off, color: !sensorModel.mode ? Colors.green[500]: Colors.red[500],),
                     onPressed: () {
                       setState(() {
                         toggleMode(!sensorModel.mode);
                         toggleValve(1, true);
                         toggleValve(2, true);
-
                       });
                     },
                     iconSize: 65,
@@ -226,16 +224,17 @@ class _ManualModeState extends State<ManualMode> {
             ),
           ),
 
+          SizedBox(height: 10,),
           //valve control
           !sensorModel.mode? Padding(
             padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
             child: Column(
                 mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
                         child: Image.asset(
@@ -272,8 +271,8 @@ class _ManualModeState extends State<ManualMode> {
                                       : 'is Running',
                                   style: TextStyle(
                                     fontFamily: 'Lexend Deca',
-                                    color: Colors.red,
-                                    fontSize: 12,
+                                    color: sensorModel.v1 ? Colors.green[500]: Colors.red[500],
+                                    fontSize: 18,
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
@@ -283,15 +282,16 @@ class _ManualModeState extends State<ManualMode> {
                         ),
                       ),
                       IconButton(
-                        icon: !sensorModel.v1
-                            ? Icon(Icons.invert_colors_off_rounded)
-                            : Icon(Icons.invert_colors),
+                        icon: Icon(!sensorModel.v1
+                            ? Icons.play_circle
+                            : Icons.stop_circle ,color: Colors.grey[850],
+                            ),
                         onPressed: () {
                           setState(() {
                             toggleValve(1, sensorModel.v1);
                           });
                         },
-                        iconSize: 65,
+                        iconSize: 55,
                       )
                     ],
                   ),
@@ -299,72 +299,71 @@ class _ManualModeState extends State<ManualMode> {
                     height: 25,
                   ),
 
-                  // Valve 2
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Center(
-                        child: Image.asset(
-                          'assets/valve.webp',
-                          width: 55,
-                          height: 55,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Valve 2',
-                                style: TextStyle(
-                                  fontFamily: 'Lexend Deca',
-                                  color: Color(0xFF090F13),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 4, 0, 0),
-                                child: Text(
-                                  !sensorModel.v2
-                                      ? 'is Idle'
-                                      : 'is Running',
-                                  style: TextStyle(
-                                    fontFamily: 'Lexend Deca',
-                                    color: Colors.red,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      IconButton(
-                        icon: !sensorModel.v2
-                            ? Icon(Icons.invert_colors_off_rounded)
-                            : Icon(Icons.invert_colors),
-                        onPressed: () {
-                          setState(() {
-                            toggleValve(2, sensorModel.v2);
-                          });
-                        },
-                        iconSize: 65,
-                      )
-                    ],
-                  ),
+                  // // Valve 2
+                  // Row(
+                  //   mainAxisSize: MainAxisSize.max,
+                  //   crossAxisAlignment: CrossAxisAlignment.end,
+                  //   children: [
+                  //     Center(
+                  //       child: Image.asset(
+                  //         'assets/valve.webp',
+                  //         width: 55,
+                  //         height: 55,
+                  //         fit: BoxFit.cover,
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: Padding(
+                  //         padding:
+                  //             EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                  //         child: Column(
+                  //           mainAxisSize: MainAxisSize.max,
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           crossAxisAlignment: CrossAxisAlignment.start,
+                  //           children: [
+                  //             Text(
+                  //               'Valve 2',
+                  //               style: TextStyle(
+                  //                 fontFamily: 'Lexend Deca',
+                  //                 color: Color(0xFF090F13),
+                  //                 fontSize: 20,
+                  //                 fontWeight: FontWeight.w500,
+                  //               ),
+                  //             ),
+                  //             Padding(
+                  //               padding: EdgeInsetsDirectional.fromSTEB(
+                  //                   0, 4, 0, 0),
+                  //               child: Text(
+                  //                 !sensorModel.v2
+                  //                     ? 'is Idle'
+                  //                     : 'is Running',
+                  //                 style: TextStyle(
+                  //                   fontFamily: 'Lexend Deca',
+                  //                   color: Colors.red,
+                  //                   fontSize: 12,
+                  //                   fontWeight: FontWeight.normal,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     IconButton(
+                  //       icon: !sensorModel.v2
+                  //           ? Icon(Icons.invert_colors_off_rounded)
+                  //           : Icon(Icons.invert_colors),
+                  //       onPressed: () {
+                  //         setState(() {
+                  //           toggleValve(2, sensorModel.v2);
+                  //         });
+                  //       },
+                  //       iconSize: 65,
+                  //     )
+                  //   ],
+                  // ),
                 ]),
           ): SizedBox(height: 10,)
-
           // Valve 1
         ],
       );

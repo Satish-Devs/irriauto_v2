@@ -26,7 +26,7 @@ class _VcardContainerState extends State<VcardContainer> {
             children: [
               
               ValveCard(valveNo : 1, moisture1: SensorModel.m1,moisture2 :SensorModel.m2, temp :SensorModel.temp, status : SensorModel.v1,flow :  100, humidity : SensorModel.humidity, rain : SensorModel.rain),
-              ValveCard(valveNo : 2, moisture1: SensorModel.m3,moisture2 :SensorModel.m4, temp :SensorModel.temp, status : SensorModel.v2,flow :  100, humidity : SensorModel.humidity, rain : SensorModel.rain),
+              // ValveCard(valveNo : 2, moisture1: SensorModel.m3,moisture2 :SensorModel.m4, temp :SensorModel.temp, status : SensorModel.v2,flow :  100, humidity : SensorModel.humidity, rain : SensorModel.rain),
             ]
             ),
             

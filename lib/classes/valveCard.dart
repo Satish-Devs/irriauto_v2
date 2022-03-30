@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ValveCard extends StatelessWidget {
+  var gapSize = 4.0;
   var valveNo;
   var moisture1;
   var moisture2;
@@ -10,6 +11,12 @@ class ValveCard extends StatelessWidget {
   var humidity;
   var rain;
   Map data = {};
+  var readingText = TextStyle(
+                            fontFamily: 'Lexend Deca',
+                            color: Color(0xFF090F13),
+                            fontSize: 22,
+                            fontWeight: FontWeight.normal,
+                          );
 
   ValveCard({valveNo, moisture1, moisture2, temp,status, flow, rain, humidity}) {
     this.valveNo = valveNo;
@@ -46,7 +53,7 @@ class ValveCard extends StatelessWidget {
               padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
               child: Container(
                 width: 4,
-                height: 250,
+                height: 400,
                 decoration: BoxDecoration(
                   color: Colors.orangeAccent,
                   borderRadius: BorderRadius.circular(4),
@@ -61,25 +68,60 @@ class ValveCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Valve : $valveNo',
-                        style: TextStyle(
-                          fontFamily: 'Lexend Deca',
-                          color: Color(0xFF090F13),
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                        ),
+                      Row(
+                        children: [
+                        
+                          Text(
+                            'Valve : $valveNo  ',
+                            style: TextStyle(
+                              fontFamily: 'Lexend Deca',
+                              color: Colors.black,
+                              fontSize: 35,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                           
+                        ],
                       ),
+
+                      SizedBox(height: 15,),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                        child: Text(
-                          'Temperature : $temp°C \nMoisture Sensor 1 : $moisture1 \nMoisture Sensor 2: $moisture2\nHumidity : $humidity\nRain : $rain\nWater Flow : $flow L ',
-                          style: TextStyle(
-                            fontFamily: 'Lexend Deca',
-                            color: Color(0xFF090F13),
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Temperature : $temp°C',
+                              style: readingText,
+                            ),
+                            SizedBox(height: gapSize,),
+
+                            Text(
+                              'Moisture Sensor 1 : $moisture1',
+                              style: readingText,
+                            ),
+                            SizedBox(height: gapSize,),
+                            Text(
+                              'Moisture Sensor 2: $moisture2',
+                              style: readingText,
+                            ),
+                            SizedBox(height: gapSize,),
+                            Text(
+                              'Humidity : $humidity',
+                              style: readingText,
+                            ),
+                            SizedBox(height: gapSize,),
+                            Text(
+                              'Rain : $rain ',
+                              style: readingText,
+                            ),
+                            SizedBox(height: gapSize,),
+                            Text(
+                              'Water Flow : $flow L ',
+                              style: readingText,
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
@@ -87,31 +129,85 @@ class ValveCard extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                        child: Text(
-                          'Status : $status',
-                          style: TextStyle(
-                            fontFamily: 'Lexend Deca',
-                            color: Colors.redAccent,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                          ),
+                        child:  Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text('Status  :  ',
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.black,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+
+                                 status?Icon(Icons.circle,
+                                color: Colors.green,):Container(),
+
+                                Text('${!status?" Idle":" Running"}',
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    color: !status?Colors.red: Colors.green,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                               
+                              ],
+                            ),
+
+                            SizedBox(height: 4,),
+
+                             Row(
+                              children: [
+                                Text('Rain  :  ',
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    color: Colors.black,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+
+                                 status?Icon(Icons.circle,
+                                color: Colors.green,):Container(),
+
+                                Text((rain >= 4000)?" Not Raining":" Raining",
+                                  style: TextStyle(
+                                    fontFamily: 'Lexend Deca',
+                                    color: (rain >= 4000)?Colors.red: Colors.lightBlue,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                               
+                              ],
+                            ),
+
+
+                         
+                          ],
                         ),
                       ),
                       SizedBox(height: 10.0),
                        ],
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/valve.webp',
-                        height: 100.0,
-                      ),
-                      SizedBox(
-                        height: 100,
-                      )
-                    ],
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 28, horizontal: 12),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        
+                        SizedBox(
+                          height: 100,
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
