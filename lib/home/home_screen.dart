@@ -1,3 +1,5 @@
+import 'package:email_password_login/model/sensor_model.dart';
+import 'package:email_password_login/model/user_model.dart';
 import 'package:email_password_login/modes/modes_home.dart';
 // import 'package:email_password_login/moisture/moistureCard.dart';
 // import 'package:email_password_login/moisture/moisture_home.dart';
@@ -7,6 +9,7 @@ import 'package:email_password_login/valve/valve_home.dart';
 import 'package:email_password_login/weather/services/permission.dart';
 import 'package:email_password_login/weather/weather.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 import '../screens/login_screen.dart';
 import 'home_item.dart';
@@ -19,7 +22,7 @@ class Home extends StatelessWidget {
     'Operating Mode',
     'Litre Based Irrigation',
     'Weather',
-    'Log Details'
+    //'Log Details'
     // 'Water Flow',
   ];
 
@@ -30,7 +33,7 @@ class Home extends StatelessWidget {
     Colors.blueAccent,
     // Colors.yellow,
     Colors.greenAccent,
-    Colors.purpleAccent
+    // Colors.purpleAccent
   ];
 
   static const _icons = <IconData>[
@@ -39,7 +42,7 @@ class Home extends StatelessWidget {
     Icons.model_training_sharp,
     Icons.support_sharp,
     Icons.wb_sunny_sharp,
-    Icons.person_outlined
+    // Icons.person_outlined
     // Icons.filter_alt,
   ];
 
@@ -48,7 +51,7 @@ class Home extends StatelessWidget {
     Modes(),
     TreeValvePage(),
     WeatherPage(),
-    WeatherPage(),
+    // WeatherPage(),
   ];
 
   final _primaryColor = Colors.white;
@@ -87,7 +90,6 @@ class Home extends StatelessWidget {
     );
 
     final appBar = AppBar(
-
       actions: <Widget>[
         Row(
           children: [
@@ -123,10 +125,10 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: appBar,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
-        child: listView,
-      ),
-      bottomSheet: footer
+            padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
+            child: listView,
+          ),
+          // bottomSheet: footer,
     );
   }
 }

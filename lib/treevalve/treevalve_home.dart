@@ -89,7 +89,9 @@ class _TreeValvePageState extends State<TreeValvePage> {
       child: MaterialButton(
         onPressed: () async {
           await ref
-              .update({"status": false})
+              .update({
+                "status": false,
+              "litres": 0})
               .then((_) => {
                     Fluttertoast.showToast(msg: "Turned off!"),
                   })
@@ -135,12 +137,12 @@ class _TreeValvePageState extends State<TreeValvePage> {
                       height: 35,
                     ),
                     !model.status ? submitButton : Container(),
-
+                    
                     Column(
                       children: [
                         model.status
                             ? Text(
-                                "Current Litres Left : ${model.litres}",
+                                "Litres Consumed : ${model.consumed} / ${model.litres}",
                                 style: TextStyle(fontSize: 25),
                               )
                             : SizedBox(),
@@ -201,7 +203,7 @@ class _TreeValvePageState extends State<TreeValvePage> {
               create: (_) => ref.onValue.map((event) {
                     return TreeValveModel.fromMap(event.snapshot.value);
                   }),
-              initialData: TreeValveModel(status: false, litres: 0)),
+              initialData: TreeValveModel(status: false, litres: 0, consumed: 0)),
         ],
         child: InputContainer,
       ),

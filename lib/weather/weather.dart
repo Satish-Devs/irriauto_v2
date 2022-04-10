@@ -131,7 +131,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
                   // Now let's create the additional information widget
                   additionalInformation("${data!.wind}", "${data!.humidity}",
-                      "${data!.pressure}", "${data!.feels_like}")
+                      "${data!.pressure}", "${data!.feels_like}","${data!.windDirection}","${data!.visibility}")
 
                   //Now that we have UI let's start integrating the API
                   //Let's create the model to store the data

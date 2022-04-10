@@ -6,7 +6,7 @@ TextStyle infoFont =
     const TextStyle(fontWeight: FontWeight.w400, fontSize: 18.0);
 
 Widget additionalInformation(
-    String wind, String humidity, String pressure, String feels_like) {
+    String wind, String humidity, String pressure, String feels_like, String windDirection, String visibility) {
   return Container(
     width: double.infinity,
     padding: EdgeInsets.all(18.0),
@@ -65,6 +65,50 @@ Widget additionalInformation(
                   "$feels_like",
                   style: infoFont,
                 )
+              ],
+            ),
+          ],
+        ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     Text("Visibility", style: titleFont),
+            //     SizedBox(height: 18.0),
+                
+            //   ],
+            // ),
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     Text("$visibility", style: infoFont),
+            //     SizedBox(height: 18.0),
+               
+            //   ],
+            // ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Wind Direction",
+                  style: titleFont,
+                ),
+              ],
+            ),
+
+             Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("$windDirection", style: infoFont),
+                SizedBox(height: 18.0),
               ],
             ),
           ],

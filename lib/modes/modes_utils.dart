@@ -1,7 +1,12 @@
 import 'package:email_password_login/model/sensor_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+// Datetime stuff
+import 'package:intl/intl.dart';
+import 'package:uuid/uuid.dart';
 
 class AutoMode extends StatefulWidget {
   const AutoMode({
@@ -10,23 +15,55 @@ class AutoMode extends StatefulWidget {
 
   @override
   State<AutoMode> createState() => _AutoModeState();
+  
+  
 }
 
 class _AutoModeState extends State<AutoMode> {
+   User? _currentUser;
+   DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+  
+   var uuid = Uuid();
+  
+  Future<void> getUser() async {
+    _currentUser =  await FirebaseAuth.instance.currentUser;
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    getUser();
+  }
+  
   // bool auto = false;
   DatabaseReference ref = FirebaseDatabase.instance.ref("sensorReadings");
+ 
 
   void toggleMode(modeVal) async {
     await ref.update({
       "mode": modeVal,
     });
+    addUserLog(modeVal?"Auto mode is turned on":"Auto mode is turned off");
   }
 
   void toggleValve(valveNo, status) async {
-  
+     
+      print("Sunil is a great developer");
       await ref.update({
         "v$valveNo": !status,
       });
+  }
+
+  void addUserLog(action) async{
+    DatabaseReference userRef = FirebaseDatabase.instance.ref("userLogs");
+    dynamic currentTime = DateFormat.jm().format(DateTime.now());
+    await userRef.child(uuid.v4()).update(
+        {
+          "time" : currentTime.toString(),
+          "email": _currentUser!.email,
+          "action": action 
+        }
+      );
   }
 
   @override
@@ -101,6 +138,7 @@ class _AutoModeState extends State<AutoMode> {
                     toggleMode(!sensorModel.mode);
                     toggleValve(1, true);
                     toggleValve(2, true);
+                    
                   });
                 },
                 iconSize: 65,
@@ -124,11 +162,44 @@ class ManualMode extends StatefulWidget {
 
 class _ManualModeState extends State<ManualMode> {
   DatabaseReference ref = FirebaseDatabase.instance.ref("sensorReadings");
+   User? _currentUser;
+   DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm:ss");
+  
+  var uuid = Uuid();
+
+  @override
+  void initState(){
+    super.initState();
+    getUser();
+  }
+  
+
+  Future<void> getUser() async {
+    _currentUser =  await FirebaseAuth.instance.currentUser;
+  }
+
+  void addUserLog(action) async{
+    getUser();
+    setState(() {
+      
+    });
+    DatabaseReference userRef = FirebaseDatabase.instance.ref("userLogs");
+    dynamic currentTime = DateFormat.jm().format(DateTime.now());
+    await userRef.child(uuid.v4()).update(
+        {
+          "time" : currentTime.toString(),
+          "email": _currentUser!.email,
+          "action": action 
+        }
+      );
+  }
 
   void toggleMode(modeVal) async {
     await ref.update({
       "mode": modeVal,
     });
+
+    addUserLog(!modeVal?"Manual mode is turned on":"Manual mode is turned off");
   }
 
   void toggleValve(valveNo, status) async {
@@ -288,7 +359,9 @@ class _ManualModeState extends State<ManualMode> {
                             ),
                         onPressed: () {
                           setState(() {
+                            addUserLog(sensorModel.v1?"Valve is turned off":"Valve is turned on");
                             toggleValve(1, sensorModel.v1);
+                            
                           });
                         },
                         iconSize: 55,

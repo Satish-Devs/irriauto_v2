@@ -29,21 +29,21 @@ Padding footer =  Padding(
         child: Row(
           children: [
             Text(
-              "             Designed by KPRIET ",
+              "                      Auto irrigation mobile app       ",
               style: TextStyle(
                 fontSize: 15.0,
               ),
             ),
-            Icon(
-              copyright,
-              size: 20,
-            ),
-            Text(
-              " All rights reserved",
-              style: TextStyle(
-                fontSize: 15.0,
-              ),
-            )
+            // Icon(
+            //   copyright,
+            //   size: 20,
+            // ),
+            // Text(
+            //   " All rights reserved",
+            //   style: TextStyle(
+            //     fontSize: 15.0,
+            //   ),
+            // )
           ],
         ),
       );

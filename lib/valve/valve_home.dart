@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             StreamProvider<SensorModel>(
                   create: (_) => ref.onValue.map((event) {
                     return SensorModel.fromMap(event.snapshot.value);
-                  }), initialData: SensorModel(humidity: 0, m1: 0, m2: 0, m3: 0, m4: 0, rain: 0, temp: 0)),
+                  }), initialData: SensorModel(humidity: 0, m1: 0, m2: 0, m3: 0, m4: 0, rain: 0, temp: 0, waterFlow: 0)),
           ],
           child: VcardContainer()
         ),

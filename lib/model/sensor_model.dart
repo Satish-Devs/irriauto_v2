@@ -12,8 +12,9 @@ class SensorModel with ChangeNotifier{
     var v1;
     var v2;
     var mode;
+    var waterFlow;
 
-    SensorModel({required this.humidity, required this.m1,required this.m2,required this.m3, required this.m4, required this.rain,required this.temp,this.v1, this.v2, this.mode});
+    SensorModel({required this.humidity, required this.m1,required this.m2,required this.m3, required this.m4, required this.rain,required this.temp,this.v1, this.v2, this.mode, this.waterFlow});
 
     factory SensorModel.fromMap(map){
   return SensorModel(
@@ -26,7 +27,8 @@ class SensorModel with ChangeNotifier{
     temp : map["temp"],
     v1 : map["v1"],
     v2 : map["v2"],
-    mode: map["mode"]
+    mode: map["mode"],
+    waterFlow: map["waterFlow"]
   );
   
 }
@@ -44,7 +46,8 @@ Map<String, dynamic> toMap(){
     "temp" : temp,
     "v1": v1,
     "v2" : v2,
-    "mode": mode
+    "mode": mode,
+    "waterFlow": waterFlow
     };
   }
 

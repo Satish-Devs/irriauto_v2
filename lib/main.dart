@@ -1,3 +1,4 @@
+import 'package:email_password_login/model/user_model.dart';
 import 'package:email_password_login/screens/login_screen.dart';
 import 'package:email_password_login/utils/utils.dart';
 import 'package:email_password_login/valve/valve_home.dart';
@@ -11,6 +12,11 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
+
+  //Debug
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    print(UserModel(uid: user!.uid, email: user.email).toMap());
+   });
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +29,6 @@ class MyApp extends StatelessWidget {
       title: 'Email And Password Login',
       theme: themeData,
       debugShowCheckedModeBanner: false,
-      // home: const LoginScreen(),
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {

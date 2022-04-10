@@ -158,7 +158,6 @@ class ValveCard extends StatelessWidget {
                                
                               ],
                             ),
-
                             SizedBox(height: 4,),
 
                              Row(
@@ -171,9 +170,6 @@ class ValveCard extends StatelessWidget {
                                     fontWeight: FontWeight.normal,
                                   ),
                                 ),
-
-                                 status?Icon(Icons.circle,
-                                color: Colors.green,):Container(),
 
                                 Text((rain >= 4000)?" Not Raining":" Raining",
                                   style: TextStyle(
