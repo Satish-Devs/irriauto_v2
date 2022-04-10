@@ -4,6 +4,7 @@ import 'package:email_password_login/modes/modes_home.dart';
 // import 'package:email_password_login/moisture/moistureCard.dart';
 // import 'package:email_password_login/moisture/moisture_home.dart';
 import 'package:email_password_login/treevalve/treevalve_home.dart';
+import 'package:email_password_login/userlogs/userlog_home.dart';
 import 'package:email_password_login/utils/utils.dart';
 import 'package:email_password_login/valve/valve_home.dart';
 import 'package:email_password_login/weather/services/permission.dart';
@@ -22,7 +23,7 @@ class Home extends StatelessWidget {
     'Operating Mode',
     'Litre Based Irrigation',
     'Weather',
-    //'Log Details'
+    'Log Details'
     // 'Water Flow',
   ];
 
@@ -33,7 +34,7 @@ class Home extends StatelessWidget {
     Colors.blueAccent,
     // Colors.yellow,
     Colors.greenAccent,
-    // Colors.purpleAccent
+    Colors.purpleAccent
   ];
 
   static const _icons = <IconData>[
@@ -42,7 +43,7 @@ class Home extends StatelessWidget {
     Icons.model_training_sharp,
     Icons.support_sharp,
     Icons.wb_sunny_sharp,
-    // Icons.person_outlined
+    Icons.person_outlined
     // Icons.filter_alt,
   ];
 
@@ -51,6 +52,8 @@ class Home extends StatelessWidget {
     Modes(),
     TreeValvePage(),
     WeatherPage(),
+    UserLogScreen()
+
     // WeatherPage(),
   ];
 

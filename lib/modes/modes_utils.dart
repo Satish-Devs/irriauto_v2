@@ -1,3 +1,4 @@
+import 'package:dart_ipify/dart_ipify.dart';
 import 'package:email_password_login/model/sensor_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -57,11 +58,17 @@ class _AutoModeState extends State<AutoMode> {
   void addUserLog(action) async{
     DatabaseReference userRef = FirebaseDatabase.instance.ref("userLogs");
     dynamic currentTime = DateFormat.jm().format(DateTime.now());
+
+    final ipv4 = await Ipify.ipv4();
+    final ipv6 = await Ipify.ipv64();
+
     await userRef.child(uuid.v4()).update(
         {
           "time" : currentTime.toString(),
           "email": _currentUser!.email,
-          "action": action 
+          "action": action,
+          "ipv4": ipv4,
+          "ipv64": ipv6
         }
       );
   }
@@ -179,6 +186,8 @@ class _ManualModeState extends State<ManualMode> {
   }
 
   void addUserLog(action) async{
+    final ipv4 = await Ipify.ipv4();
+    final ipv6 = await Ipify.ipv64();
     getUser();
     setState(() {
       
@@ -189,7 +198,9 @@ class _ManualModeState extends State<ManualMode> {
         {
           "time" : currentTime.toString(),
           "email": _currentUser!.email,
-          "action": action 
+          "action": action,
+          "ipv4": ipv4,
+          "ipv64": ipv6
         }
       );
   }
@@ -361,7 +372,6 @@ class _ManualModeState extends State<ManualMode> {
                           setState(() {
                             addUserLog(sensorModel.v1?"Valve is turned off":"Valve is turned on");
                             toggleValve(1, sensorModel.v1);
-                            
                           });
                         },
                         iconSize: 55,
